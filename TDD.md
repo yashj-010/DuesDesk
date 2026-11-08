@@ -1,5 +1,5 @@
 # Technical Design Document (TDD)
-## Coaching Institute Fee Tracking System & Parent Portal
+## DuesDesk — Coaching Institute Fee Tracking System & Parent Portal
 
 **GitHub Repository URL:** `https://github.com/yashj-010/coaching-fee-system`  
 **Live Application URL:** `https://coaching-fee-system.vercel.app` *(or local review at http://localhost:3000)*  

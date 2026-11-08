@@ -1,7 +1,7 @@
 # Deployment & Local Run Guide
 
 ## System Overview
-**Platform**: Coaching Institute Fee Tracking System & Parent Portal  
+**Platform**: DuesDesk — Coaching Institute Fee Tracking System & Parent Portal  
 **Client**: Company A, Jaipur (4 Centres • 2,600 Students • ₹31.2 Cr Annual Billing)  
 **Stack**: Next.js 14+ (App Router), TypeScript, Tailwind CSS, Embedded Persistent Database, Vitest
 

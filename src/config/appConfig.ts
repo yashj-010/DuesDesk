@@ -3,7 +3,7 @@
 
 export const APP_CONFIG = {
   // Name of the application (configurable)
-  name: process.env.NEXT_PUBLIC_APP_NAME || "ShikshaLedger",
+  name: process.env.NEXT_PUBLIC_APP_NAME || "DuesDesk",
   tagline: "Fee Tracking, Automated Dues & Parent Portal",
   clientName: "Company A, Jaipur",
   subTitle: "Jaipur Engineering & Medical Entrance Network (4 Centres)",

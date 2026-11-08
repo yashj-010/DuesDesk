@@ -40,7 +40,7 @@ async function generateDocx() {
             run: { bold: true, size: 36, color: "0284C7" },
           }),
           new Paragraph({
-            text: "Coaching Institute Fee Tracking System & Parent Portal",
+            text: "DuesDesk — Coaching Institute Fee Tracking System & Parent Portal",
             alignment: AlignmentType.CENTER,
             spacing: { after: 200 },
             run: { bold: true, size: 28, color: "0F172A" },

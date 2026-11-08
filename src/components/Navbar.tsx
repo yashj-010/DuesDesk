@@ -13,6 +13,7 @@ import {
   Globe,
   UserCheck,
   Building2,
+  ChevronDown,
 } from "lucide-react";
 
 export type ActiveTab =
@@ -34,6 +35,22 @@ interface NavbarProps {
   students: Array<{ id: string; name: string; batch: string }>;
 }
 
+const TABS: Array<{
+  id: ActiveTab;
+  label: string;
+  shortLabel: string;
+  icon: React.ComponentType<{ className?: string }>;
+  badge?: string;
+}> = [
+  { id: "parent", label: "Parent Portal", shortLabel: "Parent", icon: Smartphone, badge: "Mobile" },
+  { id: "accounts", label: "Dues & Ageing", shortLabel: "Ageing", icon: LayoutDashboard },
+  { id: "ledger", label: "Fee Ledger", shortLabel: "Ledger", icon: UserCheck },
+  { id: "refund", label: "MoE Refund", shortLabel: "Refund", icon: Calculator },
+  { id: "reminders", label: "Reminders", shortLabel: "Reminders", icon: BellRing },
+  { id: "risk", label: "AI Risk Queue", shortLabel: "AI Risk", icon: BrainCircuit, badge: "AI" },
+  { id: "upload", label: "Bulk CSV", shortLabel: "Upload", icon: FileSpreadsheet },
+];
+
 export const Navbar: React.FC<NavbarProps> = ({
   activeTab,
   setActiveTab,
@@ -44,39 +61,40 @@ export const Navbar: React.FC<NavbarProps> = ({
   students,
 }) => {
   return (
-    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-slate-200">
+    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-slate-200 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Top Header Bar */}
         <div className="flex items-center justify-between h-16">
           {/* Brand Logo & Name */}
           <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-sky-600 to-indigo-600 flex items-center justify-center text-white font-black shadow-sm">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-sky-600 to-indigo-600 flex items-center justify-center text-white font-black shadow-md shadow-sky-600/20">
               <Building2 className="w-5 h-5" />
             </div>
             <div>
               <div className="flex items-center space-x-2">
-                <span className="text-lg font-bold tracking-tight text-slate-900">
+                <span className="text-xl font-extrabold tracking-tight text-slate-900">
                   {APP_CONFIG.name}
                 </span>
-                <span className="hidden sm:inline-flex px-2 py-0.5 text-xs font-semibold rounded-full bg-sky-50 text-sky-700 border border-sky-200">
+                <span className="hidden sm:inline-flex px-2 py-0.5 text-[11px] font-bold rounded-full bg-sky-50 text-sky-700 border border-sky-200">
                   {APP_CONFIG.clientName}
                 </span>
               </div>
-              <p className="text-xs text-slate-500 hidden md:block">
-                Jaipur Network (4 Centres • 2,600 Students)
+              <p className="text-[11px] text-slate-500 hidden md:block">
+                Jaipur Network • 4 Centres • 2,600 Students
               </p>
             </div>
           </div>
 
-          {/* Right Header Controls: Student Selector (for Parent View) & Language Switcher */}
-          <div className="flex items-center space-x-3">
+          {/* Right Header Controls: Student Selector & Language Switcher */}
+          <div className="flex items-center space-x-2 sm:space-x-3">
             {/* Quick Student Switcher for Parent Simulation */}
-            <div className="flex items-center space-x-1.5 bg-slate-100 rounded-lg p-1 text-xs">
-              <span className="text-slate-500 font-medium px-1.5 hidden sm:inline">Active Student:</span>
+            <div className="flex items-center space-x-1.5 bg-slate-100 rounded-xl p-1 text-xs">
+              <span className="text-slate-500 font-semibold px-1.5 hidden md:inline">Student:</span>
               <select
                 aria-label="Active Student"
                 value={selectedStudentId}
                 onChange={(e) => setSelectedStudentId(e.target.value)}
-                className="bg-white border border-slate-200 rounded px-2 py-1 text-xs font-semibold text-slate-800 focus:outline-none focus:ring-1 focus:ring-sky-500"
+                className="bg-white border border-slate-200 rounded-lg px-2 py-1 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm"
               >
                 {students.map((s) => (
                   <option key={s.id} value={s.id}>
@@ -89,7 +107,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             {/* Language Switcher */}
             <button
               onClick={() => setLanguage(language === "en" ? "hi" : "en")}
-              className="inline-flex items-center space-x-1 px-2.5 py-1.5 text-xs font-semibold text-slate-700 bg-white border border-slate-300 rounded-lg hover:bg-slate-50 transition shadow-sm"
+              className="inline-flex items-center space-x-1 px-3 py-1.5 text-xs font-bold text-slate-700 bg-white border border-slate-300 rounded-xl hover:bg-slate-50 transition shadow-sm"
               title="Toggle Hindi / English"
             >
               <Globe className="w-3.5 h-3.5 text-sky-600" />
@@ -98,91 +116,61 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
         </div>
 
-        {/* Navigation Tabs Bar */}
-        <div className="flex items-center space-x-1 overflow-x-auto py-2 border-t border-slate-100 scrollbar-none text-xs sm:text-sm">
-          <button
-            onClick={() => setActiveTab("parent")}
-            className={`inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-lg font-medium whitespace-nowrap transition ${
-              activeTab === "parent"
-                ? "bg-sky-600 text-white shadow-sm"
-                : "text-slate-600 hover:text-slate-900 hover:bg-slate-100"
-            }`}
-          >
-            <Smartphone className="w-4 h-4" />
-            <span>1. Parent Portal (Mobile)</span>
-          </button>
+        {/* Responsive Navigation: Mobile Dropdown (< 1024px) / Desktop Segmented Tabs (>= 1024px) */}
+        <div className="py-2.5 border-t border-slate-100">
+          {/* Mobile View Dropdown (< 1024px) */}
+          <div className="lg:hidden flex items-center justify-between gap-2">
+            <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">
+              Active Console:
+            </span>
+            <div className="relative flex-1 max-w-xs">
+              <select
+                aria-label="Select Console Screen"
+                value={activeTab}
+                onChange={(e) => setActiveTab(e.target.value as ActiveTab)}
+                className="w-full bg-slate-100 hover:bg-slate-200 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-900 appearance-none pr-8 focus:outline-none focus:ring-2 focus:ring-sky-500 transition"
+              >
+                {TABS.map((tab, idx) => (
+                  <option key={tab.id} value={tab.id}>
+                    {idx + 1}. {tab.label} {tab.badge ? `(${tab.badge})` : ""}
+                  </option>
+                ))}
+              </select>
+              <ChevronDown className="w-4 h-4 text-slate-500 absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+            </div>
+          </div>
 
-          <button
-            onClick={() => setActiveTab("accounts")}
-            className={`inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-lg font-medium whitespace-nowrap transition ${
-              activeTab === "accounts"
-                ? "bg-sky-600 text-white shadow-sm"
-                : "text-slate-600 hover:text-slate-900 hover:bg-slate-100"
-            }`}
-          >
-            <LayoutDashboard className="w-4 h-4" />
-            <span>2. Dues & Ageing Dashboard</span>
-          </button>
+          {/* Desktop Seamless Segmented Bar (>= 1024px) - Clean, Fits Without Horizontal Scroll */}
+          <div className="hidden lg:grid lg:grid-cols-7 gap-1.5 bg-slate-100/80 p-1.5 rounded-2xl border border-slate-200/60">
+            {TABS.map((tab) => {
+              const Icon = tab.icon;
+              const isActive = activeTab === tab.id;
 
-          <button
-            onClick={() => setActiveTab("ledger")}
-            className={`inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-lg font-medium whitespace-nowrap transition ${
-              activeTab === "ledger"
-                ? "bg-sky-600 text-white shadow-sm"
-                : "text-slate-600 hover:text-slate-900 hover:bg-slate-100"
-            }`}
-          >
-            <UserCheck className="w-4 h-4" />
-            <span>3. Student Fee Ledger</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab("refund")}
-            className={`inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-lg font-medium whitespace-nowrap transition ${
-              activeTab === "refund"
-                ? "bg-sky-600 text-white shadow-sm"
-                : "text-slate-600 hover:text-slate-900 hover:bg-slate-100"
-            }`}
-          >
-            <Calculator className="w-4 h-4" />
-            <span>4. MoE 2024 Refund Calculator</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab("reminders")}
-            className={`inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-lg font-medium whitespace-nowrap transition ${
-              activeTab === "reminders"
-                ? "bg-sky-600 text-white shadow-sm"
-                : "text-slate-600 hover:text-slate-900 hover:bg-slate-100"
-            }`}
-          >
-            <BellRing className="w-4 h-4" />
-            <span>5. Reminders & Stop-on-Payment</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab("risk")}
-            className={`inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-lg font-medium whitespace-nowrap transition ${
-              activeTab === "risk"
-                ? "bg-sky-600 text-white shadow-sm"
-                : "text-slate-600 hover:text-slate-900 hover:bg-slate-100"
-            }`}
-          >
-            <BrainCircuit className="w-4 h-4" />
-            <span>6. AI Dropout Risk Queue</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab("upload")}
-            className={`inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-lg font-medium whitespace-nowrap transition ${
-              activeTab === "upload"
-                ? "bg-sky-600 text-white shadow-sm"
-                : "text-slate-600 hover:text-slate-900 hover:bg-slate-100"
-            }`}
-          >
-            <FileSpreadsheet className="w-4 h-4" />
-            <span>7. Bulk CSV Upload</span>
-          </button>
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`flex items-center justify-center space-x-1.5 px-2.5 py-2 rounded-xl text-xs font-bold transition duration-150 ${
+                    isActive
+                      ? "bg-white text-sky-700 shadow-sm border border-slate-200/80"
+                      : "text-slate-600 hover:text-slate-900 hover:bg-white/60"
+                  }`}
+                >
+                  <Icon className={`w-3.5 h-3.5 ${isActive ? "text-sky-600" : "text-slate-400"}`} />
+                  <span className="truncate">{tab.label}</span>
+                  {tab.badge && (
+                    <span
+                      className={`text-[9px] px-1 py-0.2 rounded font-extrabold ${
+                        isActive ? "bg-sky-100 text-sky-800" : "bg-slate-200 text-slate-600"
+                      }`}
+                    >
+                      {tab.badge}
+                    </span>
+                  )}
+                </button>
+              );
+            })}
+          </div>
         </div>
       </div>
     </header>
