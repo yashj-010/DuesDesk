@@ -33,7 +33,7 @@ export const translations = {
     securePayment: "100% Secure Payment • Official Receipt with GST",
 
     // Common
-    roleParent: "Parent View (Mobile)",
+    roleParent: "Parent View",
     roleAccounts: "Accounts Executive View",
     roleCounsellor: "Counsellor View",
     languageSwitch: "हिंदी में देखें",
@@ -72,7 +72,7 @@ export const translations = {
     securePayment: "100% सुरक्षित भुगतान • अधिकृत जीएसटी रसीद",
 
     // Common
-    roleParent: "अभिभावक दृश्य (मोबाइल)",
+    roleParent: "अभिभावक दृश्य",
     roleAccounts: "लेखाकार (Accounts) दृश्य",
     roleCounsellor: "परामर्शदाता (Counsellor) दृश्य",
     languageSwitch: "View in English",

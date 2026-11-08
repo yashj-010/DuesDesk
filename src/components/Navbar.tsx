@@ -42,7 +42,7 @@ const TABS: Array<{
   icon: React.ComponentType<{ className?: string }>;
   badge?: string;
 }> = [
-  { id: "parent", label: "Parent Portal", shortLabel: "Parent", icon: Smartphone, badge: "Mobile" },
+  { id: "parent", label: "Parent Portal", shortLabel: "Parent", icon: Smartphone },
   { id: "accounts", label: "Dues & Ageing", shortLabel: "Ageing", icon: LayoutDashboard },
   { id: "ledger", label: "Fee Ledger", shortLabel: "Ledger", icon: UserCheck },
   { id: "refund", label: "MoE Refund", shortLabel: "Refund", icon: Calculator },

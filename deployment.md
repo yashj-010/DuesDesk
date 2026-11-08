@@ -51,7 +51,7 @@ Create a `.env.local` file in the root directory if customizing environment sett
 
 | Variable Name | Description | Default Value |
 | :--- | :--- | :--- |
-| `NEXT_PUBLIC_APP_NAME` | Configurable display brand name | `"ShikshaLedger"` |
+| `NEXT_PUBLIC_APP_NAME` | Configurable display brand name | `"DuesDesk"` |
 | `NEXT_PUBLIC_CLIENT_NAME` | Client institutional title | `"Company A, Jaipur"` |
 | `PORT` | Local server port | `3000` |
 | `NODE_ENV` | Environment mode (`development` / `production`) | `development` |
@@ -83,7 +83,7 @@ Create a `.env.local` file in the root directory if customizing environment sett
 
 The application features a zero-friction top-bar switcher to navigate seamlessly between all reviewer personas and seeded students:
 
-### Persona 1: Parent View (Mobile-First 5-Second Glance)
+### Persona 1: Parent Portal (5-Second Glance View)
 - **Design Rule**: Parents understand dues in 5 seconds (amount, due date, pay button).
 - **Language**: English and Hindi toggle (हिंदी).
 - **Test Students**:
