@@ -1,8 +1,8 @@
 # Technical Design Document (TDD)
 ## DuesDesk — Coaching Institute Fee Tracking System & Parent Portal
 
-**GitHub Repository URL:** `https://github.com/yashj-010/coaching-fee-system`  
-**Live Application URL:** `https://coaching-fee-system.vercel.app` *(or local review at http://localhost:3000)*  
+**GitHub Repository URL:** `https://github.com/yashj-010/DuesDesk`  
+**Live Application URL:** `https://duesdesk-navy.vercel.app/` *(or local review at http://localhost:3000)*  
 **Author / Engineer:** Yash Jain (GitHub: yashj-010 • yj99901@gmail.com)  
 **Client:** Company A, Jaipur (4 Centres • 2,600 Students • 140 Staff • ₹30–34 Cr Annual Revenue)  
 **Date:** November 2026  

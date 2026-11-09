@@ -18,8 +18,8 @@
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/yashj-010/coaching-fee-system.git
-   cd coaching-fee-system
+   git clone https://github.com/yashj-010/DuesDesk.git
+   cd DuesDesk
    ```
 
 2. **Install dependencies:**
